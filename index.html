@@ -1,3 +1,4 @@
+```html id="mhxtgw"
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +60,86 @@
 
     }
 
-    /* FULLSCREEN BUTTON */
+    /* =========================
+       LOADING SCREEN
+    ========================== */
+
+    .loader-wrapper{
+
+      position:fixed;
+
+      top:0;
+      left:0;
+
+      width:100%;
+      height:100%;
+
+      background:#000;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+
+      z-index:10000;
+
+      transition:opacity 0.4s ease,
+                 visibility 0.4s ease;
+
+    }
+
+    .loader-wrapper.hidden{
+
+      opacity:0;
+      visibility:hidden;
+
+      pointer-events:none;
+
+    }
+
+    .spinner{
+
+      width:70px;
+      height:70px;
+
+      border:6px solid rgba(255,255,255,0.2);
+
+      border-top:6px solid #6c3cff;
+
+      border-radius:50%;
+
+      animation:spin 1s linear infinite;
+
+      margin-bottom:20px;
+
+    }
+
+    .loading-text{
+
+      color:white;
+
+      font-size:18px;
+      font-weight:bold;
+
+      letter-spacing:1px;
+
+    }
+
+    @keyframes spin{
+
+      0%{
+        transform:rotate(0deg);
+      }
+
+      100%{
+        transform:rotate(360deg);
+      }
+
+    }
+
+    /* =========================
+       FULLSCREEN BUTTON
+    ========================== */
 
     .fullscreen-btn{
 
@@ -90,10 +170,14 @@
     }
 
     .fullscreen-btn:hover{
+
       transform:scale(1.05);
+
     }
 
-    /* MOBILE OPTIMIZATION */
+    /* =========================
+       MOBILE OPTIMIZATION
+    ========================== */
 
     @media (max-width:768px){
 
@@ -108,6 +192,19 @@
 
       }
 
+      .spinner{
+
+        width:55px;
+        height:55px;
+
+      }
+
+      .loading-text{
+
+        font-size:15px;
+
+      }
+
     }
 
   </style>
@@ -115,6 +212,18 @@
 </head>
 
 <body>
+
+  <!-- LOADING SCREEN -->
+
+  <div class="loader-wrapper" id="loader">
+
+    <div class="spinner"></div>
+
+    <div class="loading-text">
+      Loading Touchdown Car Rental...
+    </div>
+
+  </div>
 
   <!-- FULLSCREEN BUTTON -->
 
@@ -136,7 +245,9 @@
 
   <script>
 
+    // =========================
     // FULLSCREEN FUNCTION
+    // =========================
 
     document
       .getElementById('fullscreenBtn')
@@ -171,7 +282,29 @@
 
       });
 
+    // =========================
+    // LOADING SCREEN
+    // =========================
+
+    const iframe =
+      document.getElementById('appFrame');
+
+    const loader =
+      document.getElementById('loader');
+
+    iframe.onload = () => {
+
+      setTimeout(() => {
+
+        loader.classList.add('hidden');
+
+      }, 500);
+
+    };
+
+    // =========================
     // MOBILE HEIGHT FIX
+    // =========================
 
     function setViewportHeight(){
 
@@ -193,3 +326,4 @@
 
 </body>
 </html>
+```
